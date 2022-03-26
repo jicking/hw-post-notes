@@ -1,11 +1,9 @@
 <template>
-  <CounterTest />
+  <Tutorial />
 </template>
 
 <script>
-import CounterTest from "~/components/CounterTest.vue";
 export default {
-    name: "IndexPage",
-    components: { CounterTest }
+  name: 'IndexPage',
 }
 </script>
