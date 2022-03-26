@@ -1,9 +1,11 @@
 <template>
-  <Tutorial />
+  <PostList />
 </template>
 
 <script>
+import PostList from "~/components/PostList.vue";
 export default {
-  name: 'IndexPage',
+    name: "IndexPage",
+    components: { PostList }
 }
 </script>
