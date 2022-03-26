@@ -12,7 +12,7 @@
     </div>
     <div>
       <div v-for="p in posts" :key="p.id" class="card">
-        <div class="card-header">{{ p.title}}</div>
+        <div class="card-header">{{ p.title }}</div>
         <div class="card-body">
           <p class="card-text">
             {{ p.body }}
@@ -31,16 +31,23 @@ export default {
       isFetchingPosts: false,
     }
   },
+  mounted() {
+    this.refreshPosts()
+  },
   methods: {
     async refreshPosts() {
       this.isFetchingPosts = true
+      this.post = []
 
-      const ip = await this.$axios.$get(
-        'https://jsonplaceholder.typicode.com/posts'
-      )
-      this.posts = ip
-
-      this.isFetchingPosts = false
+      try {
+        const response = await this.$axios.$get(
+          'https://jsonplaceholder.typicode.com/posts'
+        )
+        this.posts = response
+      } catch (error) {
+      } finally {
+        this.isFetchingPosts = false
+      }
     },
   },
 }
