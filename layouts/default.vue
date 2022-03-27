@@ -2,7 +2,7 @@
   <div class="page-container d-flex flex-column">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
-        <a class="navbar-brand" href="#"><strong>Post</strong>notes</a>
+        <a class="navbar-brand" href="#"><SiteLogo /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -23,19 +23,15 @@
               <NuxtLink to="/about" class="nav-link" href="#">About</NuxtLink>
             </li>
           </ul>
-          <!--<form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
         </div>
       </div>
     </nav>
-    <main class="main-container">
+    <main class="main-container mb-2">
       <Nuxt />
     </main>
     <footer class="footer">
       <div class="container">
-        <span class="text-muted"><strong>Post</strong>notes</span>
+        2022 <span class="text-muted"><SiteLogo /></span> a demo app crafted by <a href="https://github.com/jicking" target="_blank">@jicking</a>
       </div>
     </footer>
   </div>
