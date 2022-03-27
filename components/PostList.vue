@@ -24,18 +24,12 @@
           <div class="card-header h6">{{ p.title }}</div>
           <div class="card-body">
             <div class="card-text">
-              {{ p.body }}
+              {{ p.body | truncateText }}
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="d-flex justify-content-start align-items-center mt-2">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                  View
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                  Edit
-                </button>
+                <NuxtLink :to="`/post?id=${p.id}`" class="btn btn-sm btn-outline-secondary">View Full Post</NuxtLink>
               </div>
-              <small class="text-muted">9 mins</small>
             </div>
           </div>
         </div>
