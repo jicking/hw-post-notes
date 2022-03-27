@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-container d-flex flex-column ">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
         <a class="navbar-brand" href="#"><strong>Post</strong>notes</a>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </nav>
-    <main>
+    <main class="main-container">
       <Nuxt />
     </main>
     <footer class="footer">
@@ -44,19 +44,16 @@
 </template>
 
 <style scoped>
-html {
-  position: relative;
-  min-height: 100%;
-}
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  overflow: visible;
+}
+.page-container {
+  min-height: 100vh;
+}
+.main-container {
+  flex: 1;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
   background-color: #f5f5f5;

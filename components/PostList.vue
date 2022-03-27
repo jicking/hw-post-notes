@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-md-6"><div class="h2">Posts</div></div>
-      <div class="col-md-6">
+    <div class="d-flex justify-content-between">
+      <div class="h1">Posts</div>
+      <div>
         <button
           class="btn btn-primary"
           :disabled="$fetchState.pending"
@@ -12,15 +12,32 @@
         </button>
       </div>
     </div>
+
     <div v-if="$fetchState.pending">Fetching posts...</div>
     <div v-else-if="$fetchState.error">An error occurred :(</div>
-    <div v-if="posts.length > 0">
-      <div v-for="p in posts" :key="p.id" class="card">
-        <div class="card-header">{{ p.title }}</div>
-        <div class="card-body">
-          <p class="card-text">
-            {{ p.body }}
-          </p>
+    <div
+      v-if="posts.length > 0"
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+    >
+      <div v-for="p in posts" :key="p.id" class="col">
+        <div class="card">
+          <div class="card-header h6">{{ p.title }}</div>
+          <div class="card-body">
+            <div class="card-text">
+              {{ p.body }}
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  View
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Edit
+                </button>
+              </div>
+              <small class="text-muted">9 mins</small>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -31,21 +48,20 @@
 export default {
   data() {
     return {
-      posts: []
+      posts: [],
     }
   },
   // https://nuxtjs.org/docs/features/data-fetching/
   async fetch() {
     this.posts = []
-    this.posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(
-      (res) => res.json()
-    ).then(json => json.slice(0, 10))
+    this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((res) => res.json())
+      .then((json) => json.slice(0, 10))
   },
   mounted() {
     this.$fetch()
   },
-  methods: {
-  },
+  methods: {},
 }
 </script>
 
