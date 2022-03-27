@@ -31,15 +31,21 @@
     </main>
     <footer class="footer">
       <div class="container">
-        2022 <span class="text-muted"><SiteLogo /></span> a demo app crafted by <a href="https://github.com/jicking" target="_blank">@jicking</a>
+        2022 <span class="text-muted"><SiteLogo /></span> a demo app crafted by
+        <a href="https://github.com/jicking" target="_blank">@jicking</a>
       </div>
     </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
   </div>
 </template>
 
 <script>
 export default {
-    name: "DefaultLayout"
+  name: 'DefaultLayout',
 }
 </script>
 
