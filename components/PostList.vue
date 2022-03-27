@@ -23,7 +23,7 @@
       v-if="posts.length > 0"
       class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
     >
-      <div v-for="p in posts.slice(0, 9)" :key="p.id" class="col">
+      <div v-for="p in postsToDisplay" :key="p.id" class="col">
         <PostCard :post="p" />
       </div>
     </div>
@@ -74,6 +74,12 @@ export default {
       .then((res) => res.json())
       .then((json) => json)
   },
+  computed: {
+    // Return cached values until dependencies change
+    postsToDisplay () {
+      return this.posts.slice(parseInt(this.paginationItemIndexStart), 9)
+    },
+  },
   watch: {
     posts(val) {
       if (!val || val.length === 0) return
@@ -84,11 +90,11 @@ export default {
     },
   },
   created() {
-    const currentpage = parseInt(this.$route.query.page || 1) 
+    const currentpage = parseInt(this.$route.query.page || 1)
     this.paginationCurrentPage = currentpage
 
-    const startIndex = currentpage * 9
-    this.paginationItemIndexStart = startIndex 
+    const startIndex = (currentpage * 9) - 9
+    this.paginationItemIndexStart = startIndex
     console.log('this.startIndex:', startIndex) // john
   },
   mounted() {
