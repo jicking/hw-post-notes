@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container d-flex flex-column ">
+  <div class="page-container d-flex flex-column">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
         <a class="navbar-brand" href="#"><strong>Post</strong>notes</a>
@@ -17,12 +17,10 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span></a
-              >
+              <NuxtLink to="/" class="nav-link" href="#">Home</NuxtLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <NuxtLink to="/about" class="nav-link" href="#">About</NuxtLink>
             </li>
           </ul>
           <!--<form class="form-inline mt-2 mt-md-0">
@@ -42,6 +40,12 @@
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+    name: "DefaultLayout"
+}
+</script>
 
 <style scoped>
 body {
