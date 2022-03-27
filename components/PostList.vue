@@ -20,25 +20,32 @@
       class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
     >
       <div v-for="p in posts" :key="p.id" class="col">
-        <div class="card">
-          <div class="card-header h6">{{ p.title }}</div>
-          <div class="card-body">
-            <div class="card-text">
-              {{ p.body | truncateText }}
-            </div>
-            <div class="d-flex justify-content-start align-items-center mt-2">
-              <div class="btn-group">
-                <NuxtLink :to="`/post?id=${p.id}`" class="btn btn-sm btn-outline-secondary">View Full Post</NuxtLink>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PostCard :post="p" />
       </div>
+    </div>
+    <div v-if="posts.length > 9">
+      <nav aria-label="...">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </template>
 
 <script>
+// const maxPostPerPage = 9
+
 export default {
   data() {
     return {
@@ -50,7 +57,7 @@ export default {
     this.posts = []
     this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => res.json())
-      .then((json) => json.slice(0, 10))
+      .then((json) => json.slice(0, 20))
   },
   mounted() {
     this.$fetch()
