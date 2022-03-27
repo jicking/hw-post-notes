@@ -5,17 +5,17 @@
       <div class="col-md-6">
         <button
           class="btn btn-primary"
-          :disabled="isFetchingPosts"
-          @click="refreshPosts()"
+          :disabled="$fetchState.pending"
+          @click="$fetch"
         >
-          {{ isFetchingPosts ? 'Fetchng...' : 'Refresh' }}
+          {{ $fetchState.pending ? 'Fetchng...' : 'Refresh' }}
         </button>
-
-        <button @click="clearPosts()">clear</button>
       </div>
     </div>
+    <div v-if="$fetchState.pending">Fetching posts...</div>
+    <div v-else-if="$fetchState.error">An error occurred :(</div>
     <div v-if="posts.length > 0">
-      <div  v-for="p in posts" :key="p.id" class="card">
+      <div v-for="p in posts" :key="p.id" class="card">
         <div class="card-header">{{ p.title }}</div>
         <div class="card-body">
           <p class="card-text">
@@ -31,31 +31,20 @@
 export default {
   data() {
     return {
-      posts: [],
-      isFetchingPosts: false,
+      posts: []
     }
+  },
+  // https://nuxtjs.org/docs/features/data-fetching/
+  async fetch() {
+    this.posts = []
+    this.posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(
+      (res) => res.json()
+    ).then(json => json.slice(0, 10))
   },
   mounted() {
-    this.refreshPosts()
+    this.$fetch()
   },
   methods: {
-    async refreshPosts() {
-      this.isFetchingPosts = true
-      this.posts = []
-
-      try {
-        const response = await this.$axios.$get(
-          'https://jsonplaceholder.typicode.com/posts'
-        )
-        this.posts = response
-      } catch (error) {
-      } finally {
-        this.isFetchingPosts = false
-      }
-    },
-    clearPosts() {
-      this.posts = []
-    }
   },
 }
 </script>
