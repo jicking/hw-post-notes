@@ -15,7 +15,9 @@
     </div>
 
     <!-- status -->
-    <div v-if="$fetchState.pending">Fetching posts...</div>
+    <div v-if="$fetchState.pending" class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <div v-else-if="$fetchState.error">An error occurred :(</div>
 
     <!-- posts -->

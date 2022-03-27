@@ -1,16 +1,37 @@
 <template>
   <div class="container">
-    <h1>Title</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus maxime
-      architecto quibusdam dolor, qui possimus, aperiam temporibus quas id quo
-      ipsa, minima enim neque consequuntur? Repudiandae quos quasi non hic.
-    </p>
+    <article v-if="post">
+      <h1>{{ post.title }}</h1>
+      <p>
+        {{ post.body }}
+      </p>
+    </article>
+    <div v-else class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      post: undefined,
+    }
+  },
+  // https://nuxtjs.org/docs/features/data-fetching/
+  async fetch() {
+    const postId = parseInt(this.$route.query.id || 1)
+    this.post = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${postId}`
+    )
+      .then((res) => res.json())
+      .then((json) => json)
+  },
+  mounted() {
+    this.$fetch()
+  },
+}
 </script>
 
 <style></style>
