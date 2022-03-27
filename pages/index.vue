@@ -6,6 +6,7 @@
 import PostList from "~/components/PostList.vue";
 export default {
     name: "IndexPage",
-    components: { PostList }
+    components: { PostList },
+    layout: 'defaultLayout'
 }
 </script>

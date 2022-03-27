@@ -1,17 +1,21 @@
 <template>
   <div class="container">
-    <div class="h2">Posts</div>
-    <div>
-      <button
-        class="btn btn-primary"
-        :disabled="isFetchingPosts"
-        @click="refreshPosts()"
-      >
-        {{ isFetchingPosts ? 'Fetchng...' : 'Refresh' }}
-      </button>
+    <div class="row">
+      <div class="col-md-6"><div class="h2">Posts</div></div>
+      <div class="col-md-6">
+        <button
+          class="btn btn-primary"
+          :disabled="isFetchingPosts"
+          @click="refreshPosts()"
+        >
+          {{ isFetchingPosts ? 'Fetchng...' : 'Refresh' }}
+        </button>
+
+        <button @click="clearPosts()">clear</button>
+      </div>
     </div>
-    <div>
-      <div v-for="p in posts" :key="p.id" class="card">
+    <div v-if="posts.length > 0">
+      <div  v-for="p in posts" :key="p.id" class="card">
         <div class="card-header">{{ p.title }}</div>
         <div class="card-body">
           <p class="card-text">
@@ -37,7 +41,7 @@ export default {
   methods: {
     async refreshPosts() {
       this.isFetchingPosts = true
-      this.post = []
+      this.posts = []
 
       try {
         const response = await this.$axios.$get(
@@ -49,6 +53,9 @@ export default {
         this.isFetchingPosts = false
       }
     },
+    clearPosts() {
+      this.posts = []
+    }
   },
 }
 </script>
