@@ -57,8 +57,6 @@
 </template>
 
 <script>
-// const maxPostPerPage = 9
-
 export default {
   data() {
     return {
@@ -68,6 +66,10 @@ export default {
       paginationCurrentPage: 1,
       paginationItemIndexStart: 1,
     }
+  },
+  // https://nuxtjs.org/docs/features/data-fetching/
+  async fetch() {
+    await this.getPosts()
   },
   computed: {
     // Return cached values until dependencies change
@@ -90,10 +92,6 @@ export default {
 
     const startIndex = currentpage * 9 - 9
     this.paginationItemIndexStart = startIndex
-    console.log('this.startIndex:', startIndex) // john
-  },
-  mounted() {
-    this.getPosts()
   },
   methods: {
     async getPosts() {

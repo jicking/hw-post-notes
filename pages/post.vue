@@ -19,16 +19,20 @@ export default {
       post: undefined,
     }
   },
-  // https://nuxtjs.org/docs/features/data-fetching/
-  async fetch() {
-    const id = this.$route.query.id
+  async mounted() {
+    await this.getPost()
+  },
+  methods: {
+    async getPost() {
+      const id = this.$route.query.id
 
-    if (!id) return
+      if (!id) return
 
-    const postId = id
-    this.post = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
-    ).then((res) => res.json())
+      const postId = id
+      this.post = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${postId}`
+      ).then((res) => res.json())
+    },
   },
 }
 </script>
