@@ -2,7 +2,7 @@
   <div class="page-container d-flex flex-column">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div class="container">
-        <a class="navbar-brand" href="#"><SiteLogo /></a>
+        <NuxtLink to="/" class="navbar-brand"><SiteLogo /></NuxtLink>
         <button
           class="navbar-toggler"
           type="button"
@@ -17,10 +17,10 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <NuxtLink to="/" class="nav-link" href="#">Home</NuxtLink>
+              <NuxtLink to="/" class="nav-link">Home</NuxtLink>
             </li>
             <li class="nav-item">
-              <NuxtLink to="/about" class="nav-link" href="#">About</NuxtLink>
+              <NuxtLink to="/about" class="nav-link">About</NuxtLink>
             </li>
           </ul>
         </div>

@@ -26,10 +26,6 @@ export default {
       `https://jsonplaceholder.typicode.com/posts/${postId}`
     )
       .then((res) => res.json())
-      .then((json) => json)
-  },
-  mounted() {
-    this.$fetch()
   },
 }
 </script>

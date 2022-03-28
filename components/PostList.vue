@@ -6,19 +6,18 @@
       <div>
         <button
           class="btn btn-primary"
-          :disabled="$fetchState.pending"
-          @click="$fetch"
+          :disabled="isLoadingData"
+          @click="getPosts()"
         >
-          {{ $fetchState.pending ? 'Fetchng...' : 'Refresh' }}
+          {{ isLoadingData ? 'Fetchng...' : 'Refresh' }}
         </button>
       </div>
     </div>
 
     <!-- status -->
-    <div v-if="$fetchState.pending" class="spinner-border" role="status">
+    <div v-if="isLoadingData" class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-    <div v-else-if="$fetchState.error">An error occurred :(</div>
 
     <!-- posts -->
     <div
@@ -63,22 +62,16 @@
 export default {
   data() {
     return {
+      isLoadingData: false,
       posts: [],
       paginationPageCount: 0,
       paginationCurrentPage: 1,
       paginationItemIndexStart: 1,
     }
   },
-  // https://nuxtjs.org/docs/features/data-fetching/
-  async fetch() {
-    this.posts = []
-    this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((res) => res.json())
-      .then((json) => json)
-  },
   computed: {
     // Return cached values until dependencies change
-    postsToDisplay () {
+    postsToDisplay() {
       return this.posts.slice(parseInt(this.paginationItemIndexStart), 9)
     },
   },
@@ -95,14 +88,22 @@ export default {
     const currentpage = parseInt(this.$route.query.page || 1)
     this.paginationCurrentPage = currentpage
 
-    const startIndex = (currentpage * 9) - 9
+    const startIndex = currentpage * 9 - 9
     this.paginationItemIndexStart = startIndex
     console.log('this.startIndex:', startIndex) // john
   },
   mounted() {
-    this.$fetch()
+    this.getPosts()
   },
-  methods: {},
+  methods: {
+    async getPosts() {
+      this.isLoadingData = true
+      this.posts = []
+      this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
+        .then((res) => res.json())
+        .finally(() => { this.isLoadingData = false })
+    },
+  },
 }
 </script>
 
