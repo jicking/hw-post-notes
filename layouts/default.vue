@@ -31,7 +31,8 @@
     </main>
     <footer class="footer">
       <div class="container">
-        © 2022 <span class="text-muted"><SiteLogo /></span> . A demo app crafted by
+        © 2022 <span class="text-muted"><SiteLogo /></span> . A demo app crafted
+        by
         <a href="https://github.com/jicking" target="_blank">@jicking</a>
       </div>
     </footer>

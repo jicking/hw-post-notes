@@ -101,7 +101,9 @@ export default {
       this.posts = []
       this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
         .then((res) => res.json())
-        .finally(() => { this.isLoadingData = false })
+        .finally(() => {
+          this.isLoadingData = false
+        })
     },
   },
 }

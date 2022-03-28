@@ -3,11 +3,13 @@
 A simple post list app.
 
 ## Tech
+
 - Nuxt 2 (static)
 - Bootstrap 5
 - Pinia
 
 ## Todos
+
 - paginate posts
 - Add hero section
 - search form on hero

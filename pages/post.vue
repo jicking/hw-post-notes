@@ -24,8 +24,7 @@ export default {
     const postId = parseInt(this.$route.query.id || 1)
     this.post = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${postId}`
-    )
-      .then((res) => res.json())
+    ).then((res) => res.json())
   },
 }
 </script>
