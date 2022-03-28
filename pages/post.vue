@@ -21,7 +21,11 @@ export default {
   },
   // https://nuxtjs.org/docs/features/data-fetching/
   async fetch() {
-    const postId = parseInt(this.$route.query.id || 1)
+    const id = this.$route.query.id
+
+    if (!id) return
+
+    const postId = id
     this.post = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${postId}`
     ).then((res) => res.json())
