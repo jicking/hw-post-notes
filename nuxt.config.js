@@ -15,17 +15,13 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/bootstrap/bootstrap.css'],
-
-  script: [
-    {
-      src: '~/assets/bootstrap/bootstrap.bundle.js',
-      type: 'text/javascript',
-    },
-  ],
+  css: ['~/assets/bootstrap/bootstrap.min.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/truncateText.js'],
+  plugins: [
+    { src: '@/plugins/truncateText.js' },
+    { src: '~/static/js/bootstrap.bundle.min.js', mode: 'client' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
