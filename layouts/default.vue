@@ -23,6 +23,8 @@
               <NuxtLink to="/about" class="nav-link">About</NuxtLink>
             </li>
           </ul>
+
+          <a class="btn btn-success ms-auto" href="https://github.com/jicking/hw-post-notes" target="_blank"><i class="bi bi-github ms-auto"></i> Check Code</a>
         </div>
       </div>
     </nav>
@@ -31,7 +33,7 @@
     </main>
     <footer class="footer">
       <div class="container">
-        © 2022 <span class="text-muted"><SiteLogo /></span> . A demo app crafted
+        © 2022 <span class="text-muted"><SiteLogo /></span> is crafted
         by
         <a href="https://github.com/jicking" target="_blank">@jicking</a>
       </div>

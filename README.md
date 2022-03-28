@@ -1,17 +1,9 @@
 # PostList
 
-A simple post list app.
+A simple post list app created in order to practice building web apps using nuxt and bootstrap.
 
 ## Tech
 
-- Nuxt 2 (static)
+- Nuxt 2
 - Bootstrap 5
-- Pinia
 
-## Todos
-
-- paginate posts
-- Add hero section
-- search form on hero
-- filter posts by search filter
-- Store posts in pinia store
