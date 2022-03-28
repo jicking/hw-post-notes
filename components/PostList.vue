@@ -30,11 +30,11 @@
     </div>
 
     <!-- pagination -->
-    <div v-if="posts.length > 9">
+    <div v-if="posts.length > 9" class="mt-4">
       <nav aria-label="...">
         <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+          <li :class="`page-item ${paginationCurrentPage === 1 ? 'disabled':''}`">
+            <a class="page-link" :href="`/?page=${paginationCurrentPage - 1}`">Previous</a>
           </li>
 
           <li
@@ -47,8 +47,8 @@
           >
             <a :href="`/?page=${index}`" class="page-link">{{ index }}</a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+          <li class="page-item" :class="`page-item ${paginationCurrentPage === paginationPageCount ? 'disabled':''}`">
+            <a class="page-link" :href="`/?page=${paginationCurrentPage + 1}`">Next</a>
           </li>
         </ul>
       </nav>
