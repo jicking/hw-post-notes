@@ -21,7 +21,7 @@
 
     <!-- posts -->
     <div
-      v-if="posts.length > 0"
+      v-if="postsToDisplay.length > 0"
       class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
     >
       <div v-for="p in postsToDisplay" :key="p.id" class="col">
@@ -62,46 +62,42 @@ export default {
     return {
       isLoadingData: false,
       posts: [],
+      postsToDisplay: [],
       paginationPageCount: 0,
       paginationCurrentPage: 1,
-      paginationItemIndexStart: 1,
     }
   },
   // https://nuxtjs.org/docs/features/data-fetching/
   async fetch() {
     await this.getPosts()
   },
-  computed: {
-    // Return cached values until dependencies change
-    postsToDisplay() {
-      return this.posts.slice(parseInt(this.paginationItemIndexStart), 9)
-    },
-  },
-  watch: {
-    posts(val) {
-      if (!val || val.length === 0) return
-
-      const excessCount = parseInt(val.length) % 9
-      const pageCount = (val.length - excessCount) / 9
-      this.paginationPageCount = pageCount
-    },
-  },
-  created() {
-    const currentpage = parseInt(this.$route.query.page || 1)
-    this.paginationCurrentPage = currentpage
-
-    const startIndex = currentpage * 9 - 9
-    this.paginationItemIndexStart = startIndex
+  async mounted() {
+    if (this.posts.count === 0) await this.getPosts()
   },
   methods: {
     async getPosts() {
       this.isLoadingData = true
       this.posts = []
-      this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const posts = await fetch('https://jsonplaceholder.typicode.com/posts')
         .then((res) => res.json())
         .finally(() => {
           this.isLoadingData = false
         })
+      this.posts = posts
+
+      // set paginated data
+      const currentpage = parseInt(this.$route.query.page || 1)
+      this.paginationCurrentPage = currentpage
+
+      const startIndex = currentpage * 9 - 9
+      const slicedPost = posts.slice(startIndex, startIndex + 9)
+      this.postsToDisplay = slicedPost
+
+      // set pagination links count
+      const postCount = this.posts.length
+      const excessCount = postCount % 9
+      const pageCount = (postCount - excessCount) / 9 + (excessCount ? 1 : 0)
+      this.paginationPageCount = pageCount
     },
   },
 }
